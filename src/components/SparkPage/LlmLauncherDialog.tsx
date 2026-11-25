@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import { useEffect, useId, useState } from "react";
 import { createPortal } from "react-dom";
@@ -228,6 +229,7 @@ export function LlmLauncherDialog({ open, sparkId, sparkName, launcher, onClose,
             {editing ? t("launcher.edit") : t("launcher.add")}
           </h2>
         </div>
+        <ReadOnlyGate>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -354,6 +356,7 @@ export function LlmLauncherDialog({ open, sparkId, sparkName, launcher, onClose,
             </div>
           </div>
         </form>
+        </ReadOnlyGate>
       </div>
     </div>,
     document.body

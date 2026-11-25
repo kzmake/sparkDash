@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { PlatformBadge, gapFor, honestValue } from "../ui/platform";
 import { RuntimeChips } from "../ui/RuntimeChips";
 import { memo, useState, type ReactNode } from "react";
@@ -371,6 +372,7 @@ function SparkCardImpl({
         <div className="ov-sc__off">
           <span>{online ? t("card.waitingForMetrics") : t("card.hostUnreachable")}</span>
           {!online && spark.kind === "host" ? (
+            <ReadOnlyGate>
             <button
               type="button"
               className="btn btn--primary btn--sm"
@@ -380,6 +382,7 @@ function SparkCardImpl({
               <PowerOnIcon className="h-3.5 w-3.5" />
               {t("card.wakeUp")}
             </button>
+            </ReadOnlyGate>
           ) : null}
           {wakeMsg ? <span className="ov-sc__msg">{wakeMsg === "sent" ? t("card.wakePacketSent") : wakeMsg === "failed" ? t("card.wakeFailed") : wakeMsg.raw}</span> : null}
           {chips}

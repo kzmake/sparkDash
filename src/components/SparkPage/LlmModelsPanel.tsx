@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { ReadOnlyGate, useReadOnly } from "../ui/ReadOnlyGate";
 import type { TFunction } from "i18next";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
@@ -164,6 +165,7 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
   const adoptedRef = useRef(false);
   // Saves of a new order still in flight: a refresh that lands meanwhile must not put the old order back.
   const savingOrderRef = useRef(0);
+  const readOnly = useReadOnly();
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
@@ -343,6 +345,7 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
           {l.notes ? <div className="sp-launch__notes">{l.notes}</div> : null}
           {serving && live?.modelId ? <div className="sp-launch__notes mono">{live.modelId}</div> : null}
         </div>
+        <ReadOnlyGate>
         <div className="sp-launch__actions">
           {pending?.kind === "stop" ? (
             <>
@@ -448,6 +451,7 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
             </>
           )}
         </div>
+        </ReadOnlyGate>
       </SortableLaunch>
     );
   });
@@ -458,10 +462,12 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
       icon={<BotIcon className="h-4 w-4" />}
       className={className}
       actions={
+        <ReadOnlyGate>
         <button type="button" className="btn btn--sm" onClick={() => setDialog({ open: true, launcher: null })}>
           <PlusIcon className="h-3.5 w-3.5" />
           {t("models.add")}
         </button>
+        </ReadOnlyGate>
       }
     >
       <div className="sp-models">
@@ -475,14 +481,16 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
             <p>
               {t("models.empty", { name: spark.name })}
             </p>
+            <ReadOnlyGate>
             <button type="button" className="btn btn--primary btn--sm" onClick={() => setDialog({ open: true, launcher: null })}>
               <PlusIcon className="h-3.5 w-3.5" />
               {t("models.first")}
             </button>
+            </ReadOnlyGate>
           </div>
         ) : null}
         {launchers.length > 0 ? (
-          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+          <DndContext sensors={readOnly ? [] : sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <SortableContext items={launchers.map((l) => l.id)} strategy={verticalListSortingStrategy}>
               <ul className="sp-models__list">{rows}</ul>
             </SortableContext>

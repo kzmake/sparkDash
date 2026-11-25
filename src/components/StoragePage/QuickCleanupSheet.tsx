@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
@@ -355,6 +356,7 @@ export function QuickCleanupSheet({ presets, spark, data, days, now, peers: peer
       title={title}
       icon={<BoxIcon className="h-4 w-4 shrink-0" />}
       footer={
+        <ReadOnlyGate>
         <>
           <button type="button" className="btn btn--ghost" onClick={onClose} disabled={busy}>
             {t("quickCleanup.cancel", { })}
@@ -370,6 +372,7 @@ export function QuickCleanupSheet({ presets, spark, data, days, now, peers: peer
             {busy ? t("quickCleanup.working", { }) : label}
           </button>
         </>
+        </ReadOnlyGate>
       }
     >
       <p className="modal-sheet__lead">

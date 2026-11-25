@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -1804,7 +1805,9 @@ export function QualityBenchDialog({
 
   const pauseLabel = job?.paused ? t("quality.resumeRun") : t("quality.pauseRun");
   const pauseTitle = job?.paused ? t("quality.resumeTitle") : t("quality.pauseTitle");
-  const runControl = isRunning ? (
+  const runControl = (
+    <ReadOnlyGate>
+    {isRunning ? (
     <>
       <button type="button" className="btn" onClick={() => void handlePauseResume()} title={pauseTitle}>
         {pauseLabel}
@@ -1824,6 +1827,8 @@ export function QualityBenchDialog({
         {starting ? "Starting…" : "Run quality bench"}
       </button>
     </>
+  )}
+    </ReadOnlyGate>
   );
 
   const configNode = (
@@ -2299,6 +2304,7 @@ export function QualityBenchDialog({
 
         <footer className="bench-sheet__footer">
           {job?.status === "running" ? (
+            <ReadOnlyGate>
             <>
               <button type="button" className="bench-btn bench-btn--ghost" onClick={() => void handlePauseResume()} title={pauseTitle}>
                 {pauseLabel}
@@ -2307,7 +2313,9 @@ export function QualityBenchDialog({
                 {t("dialog.cancel")}
               </button>
             </>
+            </ReadOnlyGate>
           ) : job ? (
+            <ReadOnlyGate>
             <>
               {job.resumable && (
                 <button type="button" className="bench-btn bench-btn--primary" onClick={() => void handleResumeRun()} disabled={starting} title={t("quality.resumeRunTitle")}>
@@ -2361,7 +2369,9 @@ export function QualityBenchDialog({
                 {t("dialog.runAgain")}
               </button>
             </>
+            </ReadOnlyGate>
           ) : (
+            <ReadOnlyGate>
             <>
               <button type="button" className="bench-btn bench-btn--ghost" onClick={onClose}>
                 {t("dialog.close")}
@@ -2375,6 +2385,7 @@ export function QualityBenchDialog({
                 {starting ? t("dialog.starting") : t("quality.run")}
               </button>
             </>
+            </ReadOnlyGate>
           )}
         </footer>
       </div>

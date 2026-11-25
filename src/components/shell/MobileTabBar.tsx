@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { BenchIcon } from "../bench/BenchIcon";
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
@@ -173,6 +174,7 @@ export function MobileTabBar({ sparks, activeId, onSelect, onAdd, onOpenSettings
                       <span className="rail-item__sub">{railSubLabel(s, statusLabels)}</span>
                     </button>
                   ))}
+                  <ReadOnlyGate>
                   <button
                     type="button"
                     className="rail-item"
@@ -184,6 +186,7 @@ export function MobileTabBar({ sparks, activeId, onSelect, onAdd, onOpenSettings
                     <PlusIcon className="h-4 w-4" />
                     <span className="rail-item__name">{t("mobile.addSpark")}</span>
                   </button>
+                  </ReadOnlyGate>
                   <div className="rail-label rail-label--spaced">
                     <span>{t("nav.fleet")}</span>
                   </div>

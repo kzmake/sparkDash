@@ -1,3 +1,4 @@
+import { ReadOnlyGate, useReadOnly } from "../ui/ReadOnlyGate";
 import { BenchIcon } from "../bench/BenchIcon";
 import { useEffect, useMemo, useState, type MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
@@ -239,7 +240,8 @@ export function AppSidebar({
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates, keyboardCodes: RAIL_KEYBOARD_CODES })
   );
-  const canReorder = Boolean(onReorder) && sparks.length > 1;
+  const readOnly = useReadOnly();
+  const canReorder = Boolean(onReorder) && sparks.length > 1 && !readOnly;
 
   const handleDragEnd = (event: DragEndEvent) => {
     markRailDrop();
@@ -293,9 +295,11 @@ export function AppSidebar({
       <div className="min-h-0">
         <div className="rail-label">
           <span>{t("nav.sparks")}</span>
+          <ReadOnlyGate>
           <button type="button" onClick={onAdd} title={t("sidebar.addSparkTitle")} aria-label={t("sidebar.addSpark")}>
             <PlusIcon className="h-3.5 w-3.5" />
           </button>
+          </ReadOnlyGate>
         </div>
         {canReorder ? (
           <DndContext

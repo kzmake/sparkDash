@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { revokeElevatedDelete } from "../../api/client";
@@ -67,9 +68,11 @@ export function AdminDeleteAckNote({ sparkId, ack, account, onChanged }: AdminDe
         Administrator deletes of folders are allowed on this Spark: processes running as <b>{who}</b> are treated as having root access (since {since}).
         {problem ? <span className="st-ack-note__problem"> {problem}</span> : null}
       </span>
+      <ReadOnlyGate>
       <button type="button" className="btn btn--sm btn--ghost" onClick={() => void revoke()} disabled={busy}>
         {busy ? "Turning off…" : "Turn off"}
       </button>
+      </ReadOnlyGate>
     </div>
   );
 }

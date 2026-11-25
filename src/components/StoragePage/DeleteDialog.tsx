@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { acknowledgeElevatedDelete, ApiError, deleteStoragePath } from "../../api/client";
 import type { StorageElevatedDeleteAck } from "../../api/types";
 import { formatBytes } from "../../shared/formatBytes";
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { AlertTriangleIcon, CopyIcon, FileIcon, FolderIcon, TrashIcon } from "../ui/icons";
 import { AdminDeleteAckField } from "./AdminDeleteAck";
 import { AdminFields } from "./AdminFields";
@@ -179,6 +180,7 @@ export function DeleteDialog({ sparkId, sparkName, target, access, preferAdmin, 
       title={isFolder ? t("deletion.deleteFolderTitle") : t("deletion.deleteFileTitle")}
       icon={<TrashIcon className="h-4 w-4 shrink-0" />}
       footer={
+        <ReadOnlyGate>
         <>
           <button type="button" className="btn btn--ghost" onClick={onClose} disabled={busy}>
             {t("deletion.cancel")}
@@ -188,6 +190,7 @@ export function DeleteDialog({ sparkId, sparkName, target, access, preferAdmin, 
             {busy ? t("deletion.deleting") : asAdmin ? t("deletion.deleteAsAdmin") : freesNone ? t("deletion.deleteAnyway") : t("deletion.deletePermanently")}
           </button>
         </>
+        </ReadOnlyGate>
       }
     >
       <div className="st-target">

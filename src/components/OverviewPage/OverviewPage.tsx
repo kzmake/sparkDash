@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { AlertInstance, SparkSnapshot } from "../../api/types";
@@ -275,6 +276,7 @@ export function OverviewPage({
           {sparks.length > 0 && (
             <>
               {hermesMonitoredCount > 0 && (
+                <ReadOnlyGate>
                 <button
                   type="button"
                   onClick={() => void handleUpdateAllHermes()}
@@ -293,8 +295,10 @@ export function OverviewPage({
                     </span>
                   )}
                 </button>
+                </ReadOnlyGate>
               )}
               {sparks.some((spark) => spark.kind === "host") && (
+                <ReadOnlyGate>
                 <button
                   type="button"
                   onClick={() => void handleWakeAll()}
@@ -305,6 +309,7 @@ export function OverviewPage({
                   <PowerOnIcon className="h-3.5 w-3.5" />
                   {t("batch.wakeAll")}
                 </button>
+                </ReadOnlyGate>
               )}
               <ShutdownAll sparks={sparks} className="ov-shutdown" />
             </>

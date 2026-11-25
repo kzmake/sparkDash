@@ -9,6 +9,7 @@ import type { Settings } from "../api/types";
 import { useModalPresence } from "../hooks/useModalPresence";
 import { useOverlayClose } from "../hooks/useOverlayClose";
 import packageJson from "../../package.json";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 import { XIcon } from "./ui/icons";
 import { SettingRow, ToggleRow } from "./SettingRows";
 import { AlertsDialog } from "./AlertsDialog";
@@ -315,6 +316,7 @@ export function SettingsDialog({ open, onClose, onSaved, onOpenHarness, section 
           </button>
         </div>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__body">
           {loading && <p className="bench-sheet__hint">{t("dialog.loading")}</p>}
 
@@ -786,6 +788,7 @@ export function SettingsDialog({ open, onClose, onSaved, onOpenHarness, section 
             </a>
           </div>
         </div>
+        </ReadOnlyGate>
 
         {(invalidTimeZone || error) && <div className="modal-sheet__error">{
           invalidTimeZone ? t("errors.invalidTimeZone", { timeZone: invalidTimeZone })
@@ -794,6 +797,7 @@ export function SettingsDialog({ open, onClose, onSaved, onOpenHarness, section 
                 : error?.kind === "mqttCredentials" ? t("errors.mqttCredentials") : null
         }</div>}
 
+        <ReadOnlyGate>
         <div className="modal-sheet__footer">
           <div className="modal-sheet__footer-actions">
             <button type="button" onClick={onClose} className="btn btn--ghost">
@@ -809,6 +813,7 @@ export function SettingsDialog({ open, onClose, onSaved, onOpenHarness, section 
             </button>
           </div>
         </div>
+        </ReadOnlyGate>
       </div>
       <AlertsDialog open={showAlerts} onClose={() => setShowAlerts(false)} onSettingsSaved={handleAlertsSettings} />
     </div>

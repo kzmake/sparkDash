@@ -1,0 +1,44 @@
+/* ReadOnlyGate: the badge explains why an action area stopped responding.
+   The disabled fieldset ignores pointer events, so the wrapper's native
+   tooltip still answers a hover anywhere over the area. */
+.read-only-gate {
+  position: relative;
+}
+
+.read-only-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding: 3px 9px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: help;
+}
+
+.read-only-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-warning);
+  opacity: 0.8;
+}
+
+.read-only-fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.read-only-fieldset[disabled] {
+  opacity: 0.55;
+  pointer-events: none;
+}

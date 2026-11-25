@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { Fragment, useEffect, useId, useMemo, useRef, useState, type RefObject } from "react";
 import { useTranslation } from "react-i18next";
 import type { StorageEntry } from "../../api/types";
@@ -553,6 +554,7 @@ export function FolderBrowser(props: FolderBrowserProps) {
                 <button type="button" className="btn btn--sm btn--ghost" onClick={() => onSelect(new Set())}>
                   {t("files.clear")}
                 </button>
+                <ReadOnlyGate>
                 <button
                   type="button"
                   className="btn btn--sm btn--danger st-selbar__del"
@@ -567,6 +569,7 @@ export function FolderBrowser(props: FolderBrowserProps) {
                     {t("files.delete")}
                   </span>
                 </button>
+                </ReadOnlyGate>
               </div>
             ) : null}
           </div>

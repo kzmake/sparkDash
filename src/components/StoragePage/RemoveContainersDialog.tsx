@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "../../api/client";
@@ -74,6 +75,7 @@ export function RemoveContainersDialog({ containers, images, alsoImagesDefault, 
       title={containers.length === 1 ? t("removeContainers.titleOne", { }) : t("removeContainers.titleOther", { count: containers.length })}
       icon={<BoxIcon className="h-4 w-4 shrink-0" />}
       footer={
+        <ReadOnlyGate>
         <>
           <button type="button" className="btn btn--ghost" onClick={onClose} disabled={busy}>
             {t("removeContainers.cancel", { })}
@@ -83,6 +85,7 @@ export function RemoveContainersDialog({ containers, images, alsoImagesDefault, 
             {busy ? t("removeContainers.removing", { }) : containers.length === 1 ? t("removeContainers.confirmOne", { }) : t("removeContainers.confirmOther", { count: containers.length })}
           </button>
         </>
+        </ReadOnlyGate>
       }
     >
       <p className="modal-sheet__lead">

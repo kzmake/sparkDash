@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fetchGpuClock, fetchGpuClockCommand, resetGpuClock, setGpuClock } from "../api/client";
 import type { GpuClockStatus } from "../api/types";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 
 const MIN_CAP_MHZ = 300;
 
@@ -185,6 +186,7 @@ export function GpuClockSection({ sparkId }: { sparkId: string }) {
   };
 
   return (
+    <ReadOnlyGate>
     <div className="gpu-clock">
       <label className="field-label" htmlFor="gpu-clock-max">
         {t("gpu.cap")}
@@ -318,5 +320,6 @@ export function GpuClockSection({ sparkId }: { sparkId: string }) {
         </p>
       )}
     </div>
+    </ReadOnlyGate>
   );
 }

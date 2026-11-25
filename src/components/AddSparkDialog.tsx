@@ -6,6 +6,7 @@ import type { SparkConfig, SparkTestResponse } from "../api/types";
 import { useModalPresence } from "../hooks/useModalPresence";
 import { useOverlayClose } from "../hooks/useOverlayClose";
 import { useFocusTrap } from "../hooks/useFocusTrap";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 import { CheckIcon, ChevronRightIcon, XIcon } from "./ui/icons";
 import {
   canAdvance,
@@ -228,6 +229,7 @@ export function AddSparkDialog({ open, onClose, onAdded, defaultLlmPort = 8888 }
           </button>
         </div>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__body modal-sheet__stack">
           <Stepper step={step} />
 
@@ -514,7 +516,9 @@ export function AddSparkDialog({ open, onClose, onAdded, defaultLlmPort = 8888 }
 
           {error && <div className="modal-sheet__error">{error}</div>}
         </div>
+        </ReadOnlyGate>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__footer">
           <button type="button" onClick={onClose} className="btn btn--ghost">
             {t("actions.cancel")}
@@ -542,6 +546,7 @@ export function AddSparkDialog({ open, onClose, onAdded, defaultLlmPort = 8888 }
             )}
           </div>
         </div>
+        </ReadOnlyGate>
       </div>
     </div>,
     document.body

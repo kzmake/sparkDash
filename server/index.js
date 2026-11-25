@@ -633,7 +633,7 @@ app.post("/api/restart", (_req, res) => {
 });
 
 app.get("/api/health", (_req, res) => {
-  res.json({ ...inspectHealth(process.env.BIND_HOST || "127.0.0.1"), version: SERVER_VERSION });
+  res.json({ ...inspectHealth(process.env.BIND_HOST || "127.0.0.1"), version: SERVER_VERSION, readOnly: readOnlyMode() });
 });
 
 function clientKey(req) {

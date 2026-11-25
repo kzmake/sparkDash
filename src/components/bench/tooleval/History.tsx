@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../../ui/ReadOnlyGate";
 import { useToolEvalPresentation } from "./presentation";
 import { useShareCardLabels } from "./shareCardLabels";
 import { useTranslation } from "react-i18next";
@@ -142,6 +143,7 @@ export function History({ sparkId, sparkName, type, runs, error, followedId, vie
                 {confirmDel === r.id ? (
                   <>
                     <span className="te-confirm-text">{t("ui.deleteThisRun")}</span>
+                    <ReadOnlyGate>
                     <button
                       type="button"
                       className="btn btn--sm btn--danger"
@@ -156,6 +158,7 @@ export function History({ sparkId, sparkName, type, runs, error, followedId, vie
                     >
                       {t("ui.delete")}
                     </button>
+                    </ReadOnlyGate>
                     <button type="button" className="btn btn--sm" onClick={() => setConfirmDel(null)}>{t("ui.action.cancel")}</button>
                   </>
                 ) : (
