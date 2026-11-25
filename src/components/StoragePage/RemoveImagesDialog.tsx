@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useEffect, useMemo, useState } from "react";
 import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
@@ -156,6 +157,7 @@ export function RemoveImagesDialog({ sparkId, peers: peerSparks, images, estimat
       title={images.length === 1 ? t("removeImages.titleOne", { }) : t("removeImages.titleOther", { count: images.length })}
       icon={<BoxIcon className="h-4 w-4 shrink-0" />}
       footer={
+        <ReadOnlyGate>
         <>
           <button type="button" className="btn btn--ghost" onClick={onClose} disabled={busy}>
             {t("removeImages.cancel", { })}
@@ -165,6 +167,7 @@ export function RemoveImagesDialog({ sparkId, peers: peerSparks, images, estimat
             {busy ? t("removeImages.removing", { }) : images.length === 1 ? t("removeImages.confirmOne", { }) : t("removeImages.confirmOther", { count: images.length })}
           </button>
         </>
+        </ReadOnlyGate>
       }
     >
       <p className="modal-sheet__lead">

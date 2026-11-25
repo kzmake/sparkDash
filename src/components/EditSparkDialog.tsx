@@ -22,6 +22,7 @@ import { Tag } from "./ui/Tag";
 import { TestResultList } from "./TestResultList";
 import { GpuClockSection } from "./GpuClockSection";
 import { GpuPowerSection } from "./GpuPowerSection";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 import { XIcon } from "./ui/icons";
 import { MacAgentFields } from "./MacAgentFields";
 import "../styles/dialogs.css";
@@ -368,6 +369,7 @@ export function EditSparkDialog({
           </button>
         </div>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__body">
           {loading && <p className="text-xs text-muted">{t("actions.loading")}</p>}
 
@@ -795,7 +797,9 @@ export function EditSparkDialog({
             <div className="modal-sheet__error">{error === "notFound" ? t("edit.notFound") : error === "passwordFirstError" ? t("edit.passwordFirstError") : error === "passwordRequiredError" ? t("edit.passwordRequiredError") : error}</div>
           )}
         </div>
+        </ReadOnlyGate>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__footer">
           <button
             type="button"
@@ -831,6 +835,7 @@ export function EditSparkDialog({
             </button>
           </div>
         </div>
+        </ReadOnlyGate>
       </div>
     </div>,
     document.body

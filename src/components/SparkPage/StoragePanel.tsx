@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import { useState, useCallback } from "react";
 import type { StorageMetrics } from "../../api/types";
@@ -126,6 +127,7 @@ export function StoragePanel({
               r {formatBytesPerSec(totalRead)} · w {formatBytesPerSec(totalWrite)}
             </span>
           )}
+          <ReadOnlyGate>
           <button
             type="button"
             onClick={handleRefresh}
@@ -137,6 +139,7 @@ export function StoragePanel({
             <RotateIcon className={`h-3 w-3 ${refreshing ? "animate-spin" : ""}`} />
             <span>{refreshing ? t("storage.refreshing") : t("storage.refreshAction")}</span>
           </button>
+          </ReadOnlyGate>
           <SettingsButton
             active={showSettings}
             onClick={() => setShowSettings(!showSettings)}
@@ -147,6 +150,7 @@ export function StoragePanel({
       }
     >
       {showSettings ? (
+        <ReadOnlyGate>
         <div className="sp-stack">
           <p className="sp-hint">{t("storage.toggle")}</p>
           {storage.length === 0 ? (
@@ -190,6 +194,7 @@ export function StoragePanel({
             </p>
           </div>
         </div>
+        </ReadOnlyGate>
       ) : (
         <>
           {visibleDisks.length === 0 ? (

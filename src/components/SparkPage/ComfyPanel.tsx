@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 import { useState, useCallback, type MouseEvent } from "react";
@@ -169,6 +170,7 @@ function JobBlock({
           </p>
         </div>
         {onCancel ? (
+          <ReadOnlyGate>
           <button
             type="button"
             onClick={onCancel}
@@ -177,6 +179,7 @@ function JobBlock({
           >
             {cancelling ? "…" : variant === "running" ? t("comfy.cancel") : t("comfy.remove")}
           </button>
+          </ReadOnlyGate>
         ) : null}
       </div>
 

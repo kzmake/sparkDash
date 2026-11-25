@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ToolEvalRun } from "../../../api/types";
@@ -248,6 +249,7 @@ export function LiveRun({ followed, polling, pollError, actionError, scenarioMod
         </ul>
       ) : null}
 
+      <ReadOnlyGate>
       <div className="te-actions">
         {running ? (
           confirmStop ? (
@@ -281,6 +283,7 @@ export function LiveRun({ followed, polling, pollError, actionError, scenarioMod
           {showTerm ? t("ui.hideRawOutput") : t("live.rawCount", { count: lines.length })}
         </button>
       </div>
+      </ReadOnlyGate>
       {running ? <p className="te-faint">{t("ui.stopWatchingLeavesTheRunGoingOn")}</p> : null}
       {showTerm ? (
         <div className="te-live__term">

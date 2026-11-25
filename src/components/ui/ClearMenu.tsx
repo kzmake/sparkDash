@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "./ReadOnlyGate";
 import { useEffect, useRef, useState } from "react";
 import "../../styles/clearmenu.css";
 
@@ -92,6 +93,7 @@ export function ClearMenu<T>({
   };
 
   return (
+    <ReadOnlyGate>
     <span className="ac-clear" ref={root}>
       <button
         type="button"
@@ -134,5 +136,6 @@ export function ClearMenu<T>({
         {msg ? (msg.ok ? (msg.count === 0 ? copy.nothing : copy.deleted(msg.count)) : msg.error ?? copy.failed) : null}
       </span>
     </span>
+    </ReadOnlyGate>
   );
 }

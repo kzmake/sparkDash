@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
@@ -468,10 +469,12 @@ export function DockerTab({ spark, peers = [], access, onNotice, onDiskChanged }
                 </button>
               ) : null}
               {chosenContainers.length > 0 ? (
+                <ReadOnlyGate>
                 <button type="button" className="btn btn--sm btn--danger" onClick={() => setContainerDialog({ ids: chosenContainers.map((c) => c.id), alsoImages: false })}>
                   <TrashIcon className="h-3.5 w-3.5" />
                   {t("docker.removeContainers", { count: chosenContainers.length })}
                 </button>
+                </ReadOnlyGate>
               ) : null}
             </div>
           </div>
@@ -497,10 +500,12 @@ export function DockerTab({ spark, peers = [], access, onNotice, onDiskChanged }
           <button type="button" className="btn btn--sm btn--ghost" onClick={() => setSelected(new Set())}>
             {t("docker.clear", { })}
           </button>
+          <ReadOnlyGate>
           <button type="button" className="btn btn--danger" onClick={() => setConfirming(true)}>
             <TrashIcon className="h-3.5 w-3.5" />
             {t("docker.removeImages", { count: chosen.length })}
           </button>
+          </ReadOnlyGate>
         </div>
       ) : null}
 

@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
 import { fetchToolEvalInstallCommand, fetchToolEvalUpdateCheck } from "../../../api/client";
@@ -132,6 +133,7 @@ export function SetupCard({ spark, spec, status, loading, error, reload, busy }:
         </div>
       ) : null}
       {install.error ? <Notice tone="bad">{install.error}</Notice> : null}
+      <ReadOnlyGate>
       <div className="te-actions">
         {!confirm ? (
           <button type="button" className="btn btn--primary" disabled={install.running || busy} onClick={() => setConfirm(true)}>
@@ -181,6 +183,7 @@ export function SetupCard({ spark, spec, status, loading, error, reload, busy }:
           </button>
         )}
       </div>
+      </ReadOnlyGate>
     </div>
   );
 

@@ -164,5 +164,9 @@
     "emptyTitle": "No Spark registered",
     "emptyDescription": "Add a DGX Spark or GPU host to start monitoring.",
     "addSpark": "Add Spark"
+  },
+  "readOnly": {
+    "badge": "Read-only",
+    "hint": "Read-only mode (SPARKDASH_MODE_READONLY) is on: this action is disabled."
   }
 }

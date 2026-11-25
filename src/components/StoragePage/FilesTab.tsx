@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiError } from "../../api/client";
@@ -356,16 +357,20 @@ export function FilesTab({ spark, status, readOnlyReason = null, access, scan, v
       {drillError.code === "no-sudo" || drillError.code === "bad-password" ? (
         <AdminFields access={access} purpose={t("files.readFolderPurpose")} problem={null} onSubmit={() => void begin(view, true, "drill")} />
       ) : null}
+      <ReadOnlyGate>
       <button type="button" className="btn btn--sm" onClick={() => void begin(view, session.elevated || drillError.code === "no-sudo" || drillError.code === "bad-password", "drill")}>
         {t("files.tryAgain")}
       </button>
+      </ReadOnlyGate>
     </div>
   ) : (
     <div className="st-looking">
       <p>{t("files.unmeasuredFolder")}</p>
+      <ReadOnlyGate>
       <button type="button" className="btn btn--sm btn--primary" onClick={() => void begin(view, session.elevated, "drill")} disabled={scanBusy}>
         {t("files.lookInside", { name: viewEntry ? baseName(viewEntry.path) : "" })}
       </button>
+      </ReadOnlyGate>
     </div>
   );
 

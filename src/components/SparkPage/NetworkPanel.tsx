@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import type { NetworkMetrics } from "../../api/types";
@@ -104,6 +105,7 @@ export function NetworkPanel({
       }
     >
       {showSettings ? (
+        <ReadOnlyGate>
         <div className="sp-stack">
           <p className="sp-hint">{t("network.toggle")}</p>
           {interfaces.length === 0 ? (
@@ -127,6 +129,7 @@ export function NetworkPanel({
             })
           )}
         </div>
+        </ReadOnlyGate>
       ) : (
         <>
           <div className="sp-decode">

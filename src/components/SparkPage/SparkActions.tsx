@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
 import { useState } from "react";
@@ -97,6 +98,7 @@ export function SparkActions({ spark, onEdit, className }: SparkActionsProps) {
   }
 
   return (
+    <ReadOnlyGate>
     <>
       <div className={className}>
         {powerMsg && (
@@ -198,5 +200,6 @@ export function SparkActions({ spark, onEdit, className }: SparkActionsProps) {
         warnings={shutdownWarnings(spark, t)}
       />
     </>
+    </ReadOnlyGate>
   );
 }

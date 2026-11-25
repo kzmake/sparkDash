@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useShowcaseText } from "./showcaseText";
 import "../../styles/showcase.css";
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import {
   cancelShowcase,
   cancelShowcaseBeacon,
@@ -840,6 +841,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
               </div>
             )}
             {running && (
+              <ReadOnlyGate>
               <button
                 type="button"
                 className="showcase-btn showcase-btn--danger"
@@ -849,6 +851,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
               >
                 {t("text.stop")}
               </button>
+              </ReadOnlyGate>
             )}
           </div>
         </div>
@@ -985,6 +988,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 &nbsp;
               </span>
               <div className="showcase-config__actions">
+                <ReadOnlyGate>
                 <button
                   type="button"
                   className="showcase-btn showcase-btn--primary"
@@ -993,7 +997,9 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 >
                   {starting ? t("text.starting") : t("text.run")}
                 </button>
+                </ReadOnlyGate>
                 {running && (
+                  <ReadOnlyGate>
                   <button
                     type="button"
                     className="showcase-btn showcase-btn--danger"
@@ -1003,6 +1009,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                   >
                   {t("text.stop")}
                   </button>
+                  </ReadOnlyGate>
                 )}
                 <button
                   type="button"
@@ -1048,6 +1055,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 >
                   {historyLoading ? t("text.loading") : t("text.refresh")}
                 </button>
+                <ReadOnlyGate>
                 <button
                   type="button"
                   className="showcase-btn showcase-btn--ghost"
@@ -1056,6 +1064,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 >
                   {t("text.clear")}
                 </button>
+                </ReadOnlyGate>
               </div>
             </div>
             {!history.length && !historyLoading ? (

@@ -4,6 +4,7 @@ import type { SparkSnapshot } from "../api/types";
 import { shutdownAllSparks } from "../api/client";
 import { ConfirmShutdownDialog } from "./ConfirmShutdownDialog";
 import { shutdownWarnings } from "./OverviewPage/fleetStats";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 import { PowerOffIcon } from "./ui/icons";
 
 /**
@@ -56,6 +57,7 @@ export function ShutdownAll({ sparks, className = "" }: { sparks: SparkSnapshot[
               ].join(", ")}
         </span>
       ) : null}
+      <ReadOnlyGate>
       <button
         type="button"
         onClick={() => setOpen(true)}
@@ -66,6 +68,7 @@ export function ShutdownAll({ sparks, className = "" }: { sparks: SparkSnapshot[
         <PowerOffIcon className="h-3.5 w-3.5" />
         {t("shutdown.button")}
       </button>
+      </ReadOnlyGate>
       <ConfirmShutdownDialog
         open={open}
         onClose={() => setOpen(false)}

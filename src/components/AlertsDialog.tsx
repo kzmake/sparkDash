@@ -6,6 +6,7 @@ import type { AlertChannel, AlertChannelType, AlertEvent, AlertInstance, AlertRu
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useModalPresence } from "../hooks/useModalPresence";
 import { formatSince } from "../shared/formatSince";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 import { PlusIcon, XIcon } from "./ui/icons";
 import { SettingRow, ToggleRow } from "./SettingRows";
 import "../styles/dialogs.css";
@@ -243,6 +244,7 @@ export function AlertsDialog({ open, onClose, onSettingsSaved }: AlertsDialogPro
           </button>
         </div>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__body">
           {loading && <p className="bench-sheet__hint">{t("actions.loading")}</p>}
 
@@ -429,6 +431,7 @@ export function AlertsDialog({ open, onClose, onSettingsSaved }: AlertsDialogPro
             </>
           )}
         </div>
+        </ReadOnlyGate>
 
         {error && (
           <div className="modal-sheet__error alerts-error" role="alert">
@@ -436,6 +439,7 @@ export function AlertsDialog({ open, onClose, onSettingsSaved }: AlertsDialogPro
           </div>
         )}
 
+        <ReadOnlyGate>
         <div className="modal-sheet__footer">
           <span className="field-hint" role="status">
             {savedNote ? t("alerts.saved") : dirty ? t("alerts.unsaved") : ""}
@@ -449,6 +453,7 @@ export function AlertsDialog({ open, onClose, onSettingsSaved }: AlertsDialogPro
             </button>
           </div>
         </div>
+        </ReadOnlyGate>
       </div>
     </div>,
     document.body

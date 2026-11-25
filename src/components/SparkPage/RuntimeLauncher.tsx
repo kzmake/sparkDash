@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { MacRuntime, RuntimeControlTarget, RuntimeControlView } from "../../api/types";
 import { fetchRuntimeControl, startMacRuntime, stopMacRuntime } from "../../api/client";
@@ -548,6 +549,7 @@ function RuntimeLauncherForNode({
           </p>
         )}
         {showAction && (
+          <ReadOnlyGate>
           <button
             type="button"
             data-action={actionType}
@@ -561,6 +563,7 @@ function RuntimeLauncherForNode({
           >
             {effectiveBusy ? "Working…" : actionType === "stop" ? "Stop" : actionType === "switch" ? "Switch" : "Launch"}
           </button>
+          </ReadOnlyGate>
         )}
         {effectiveBusy && (
           <p className="text-[11px] text-muted" role="status" data-testid="runtime-launcher-progress">

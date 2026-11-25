@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { previewToolEval, probeToolEval } from "../../../api/client";
@@ -88,6 +89,7 @@ export function RunCard({ spark, type, request, preview, problems, installed, bu
       ) : null}
       {startError ? <Notice tone="bad" title={t("ui.couldNotStart")}>{startError}</Notice> : null}
 
+      <ReadOnlyGate>
       <div className="te-actions te-actions--stack">
         <button type="button" className="btn btn--primary te-start" disabled={disabled} onClick={onStart} aria-describedby={reason ? "te-start-reason" : undefined}>
           {starting ? t("ui.launcher.starting") : type === "tool-eval" ? t("run.startEvaluation") : t("run.startBenchmark")}
@@ -108,6 +110,7 @@ export function RunCard({ spark, type, request, preview, problems, installed, bu
           ) : null}
         </div>
       </div>
+      </ReadOnlyGate>
 
       {probe.res || probe.error ? (
         <div className="te-probe" role="status">

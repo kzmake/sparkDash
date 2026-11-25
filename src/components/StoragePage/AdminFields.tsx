@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useId } from "react";
 import { useTranslation } from "react-i18next";
 import { LockIcon } from "../ui/icons";
@@ -31,9 +32,11 @@ export function AdminFields({ access, disabled, purpose, onSubmit, autoFocus, pr
         <p className="st-admin__note">
           <LockIcon className="h-3.5 w-3.5" /> {t("admin.saved")}
         </p>
+        <ReadOnlyGate>
         <button type="button" className="btn btn--sm btn--ghost" onClick={() => void access.forgetSaved()} disabled={disabled}>
           {t("admin.forgetPassword")}
         </button>
+        </ReadOnlyGate>
       </div>
     );
   }

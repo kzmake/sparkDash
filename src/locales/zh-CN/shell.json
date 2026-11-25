@@ -164,5 +164,9 @@
     "emptyTitle": "尚未注册 Spark",
     "emptyDescription": "添加 DGX Spark 或 GPU 主机以开始监控。",
     "addSpark": "添加 Spark"
+  },
+  "readOnly": {
+    "badge": "只读",
+    "hint": "只读模式（SPARKDASH_MODE_READONLY）已开启，此操作已被禁用。"
   }
 }
