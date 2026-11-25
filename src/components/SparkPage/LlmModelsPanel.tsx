@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ReadOnlyGate } from "../ui/ReadOnlyGate";
+import { ReadOnlyGate, useReadOnly } from "../ui/ReadOnlyGate";
 import type { TFunction } from "i18next";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
@@ -165,6 +165,7 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
   const adoptedRef = useRef(false);
   // Saves of a new order still in flight: a refresh that lands meanwhile must not put the old order back.
   const savingOrderRef = useRef(0);
+  const readOnly = useReadOnly();
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
@@ -489,7 +490,7 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
           </div>
         ) : null}
         {launchers.length > 0 ? (
-          <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+          <DndContext sensors={readOnly ? [] : sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <SortableContext items={launchers.map((l) => l.id)} strategy={verticalListSortingStrategy}>
               <ul className="sp-models__list">{rows}</ul>
             </SortableContext>

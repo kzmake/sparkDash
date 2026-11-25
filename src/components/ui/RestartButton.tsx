@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "./ReadOnlyGate";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fetchRestartAvailable, restartServer } from "../../api/client";
@@ -49,16 +50,20 @@ export function RestartButton({ className = "btn btn--primary btn--sm" }: { clas
   }
   if (state === "confirm") {
     return (
+      <ReadOnlyGate>
       <span role="group" aria-label={t("restart.confirmAria")}>
         <span className="ov-note">{t("restart.confirm")}</span>{" "}
         <button type="button" className={className} onClick={() => void run()}>{t("restart.restart")}</button>{" "}
         <button type="button" className="btn btn--sm btn--ghost" onClick={() => setState("idle")}>{t("restart.cancel")}</button>
       </span>
+      </ReadOnlyGate>
     );
   }
   return (
+    <ReadOnlyGate>
     <button type="button" className={className} onClick={() => setState("confirm")}>
       {state === "error" ? t("restart.failedRetry") : t("restart.sparkDash")}
     </button>
+    </ReadOnlyGate>
   );
 }

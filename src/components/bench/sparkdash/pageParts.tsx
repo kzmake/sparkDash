@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../../ui/ReadOnlyGate";
 import type { ReactNode } from "react";
 import "../../../styles/benchpages.css";
 import type { HistoryRow } from "./historyRows";
@@ -149,6 +150,7 @@ export function HistoryTable({
                   </button>
                 ) : null}
                 {onDelete && r.status !== "running" ? (
+                  <ReadOnlyGate>
                   <button
                     type="button"
                     className="btn btn--sm btn--ghost"
@@ -157,6 +159,7 @@ export function HistoryTable({
                   >
                     {t("history.delete")}
                   </button>
+                  </ReadOnlyGate>
                 ) : null}
               </td>
             </tr>

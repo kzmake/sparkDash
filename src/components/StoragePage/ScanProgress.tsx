@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import type { StorageScanJob } from "../../api/types";
 import { useTranslation } from "react-i18next";
 import { RotateIcon } from "../ui/icons";
@@ -74,6 +75,7 @@ export function ScanStop({ job, serverNow, onStop, requesting }: ScanStopProps) 
   const unconfirmed = stopUnconfirmed(job);
   const stopping = requesting || job.stop?.outcome === "pending";
   return (
+    <ReadOnlyGate>
     <button
       type="button"
       className="btn btn--sm btn--ghost st-stop"
@@ -84,6 +86,7 @@ export function ScanStop({ job, serverNow, onStop, requesting }: ScanStopProps) 
     >
       {stopping ? t("scan.stopping") : unconfirmed ? t("scan.tryStopAgain") : t("scan.stop")}
     </button>
+    </ReadOnlyGate>
   );
 }
 

@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useCallback, type CSSProperties, type ReactNode } from "react";
 import type { SparkSnapshot } from "../../api/types";
@@ -186,6 +187,7 @@ export function SparkPage({
 
   const addPort = llmOn ? (
     showAddPort ? (
+      <ReadOnlyGate>
       <div className="panel sp-add-port">
         <input
           type="number"
@@ -250,10 +252,13 @@ export function SparkPage({
           </button>
         </div>
       </div>
+      </ReadOnlyGate>
     ) : (
+      <ReadOnlyGate>
       <button type="button" onClick={() => setShowAddPort(true)} className="sp-add-port-btn">
         {t("page.addPort")}
       </button>
+      </ReadOnlyGate>
     )
   ) : null;
 

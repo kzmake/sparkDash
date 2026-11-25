@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useId } from "react";
 import { useTranslation } from "react-i18next";
 import type { StorageStatus } from "../../api/types";
@@ -167,6 +168,7 @@ export function AnalysePanel(props: AnalysePanelProps) {
             {t("analyse.backToResults")}
           </button>
         ) : null}
+        <ReadOnlyGate>
         <button
           type="button"
           className="btn btn--primary st-analyse__go"
@@ -177,6 +179,7 @@ export function AnalysePanel(props: AnalysePanelProps) {
           <SearchIcon className="h-3.5 w-3.5" />
           {t("analyse.submit")}
         </button>
+        </ReadOnlyGate>
       </div>
     </section>
   );

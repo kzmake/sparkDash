@@ -610,6 +610,7 @@ export function LlmPanel({
             </>
           )}
           {onRemovePort && (
+            <ReadOnlyGate>
             <button
               type="button"
               title={t("llm.removePort", { port: llmPort })}
@@ -619,6 +620,7 @@ export function LlmPanel({
               <span aria-hidden>×</span>
               <span>{t("llm.remove")}</span>
             </button>
+            </ReadOnlyGate>
           )}
           <button
             type="button"

@@ -924,6 +924,7 @@ export function BenchmarkDialog({
               <>
                 {copyButton}
                 {job.results.length > 0 && (
+                  <ReadOnlyGate>
                   <button
                     type="button"
                     className="btn btn--sm btn--ghost"
@@ -932,6 +933,7 @@ export function BenchmarkDialog({
                   >
                     {t("dialog.clearHistory")}
                   </button>
+                  </ReadOnlyGate>
                 )}
               </>
             }

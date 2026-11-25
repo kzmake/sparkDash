@@ -841,6 +841,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
               </div>
             )}
             {running && (
+              <ReadOnlyGate>
               <button
                 type="button"
                 className="showcase-btn showcase-btn--danger"
@@ -850,6 +851,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
               >
                 {t("text.stop")}
               </button>
+              </ReadOnlyGate>
             )}
           </div>
         </div>
@@ -997,6 +999,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 </button>
                 </ReadOnlyGate>
                 {running && (
+                  <ReadOnlyGate>
                   <button
                     type="button"
                     className="showcase-btn showcase-btn--danger"
@@ -1006,6 +1009,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                   >
                   {t("text.stop")}
                   </button>
+                  </ReadOnlyGate>
                 )}
                 <button
                   type="button"
@@ -1051,6 +1055,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 >
                   {historyLoading ? t("text.loading") : t("text.refresh")}
                 </button>
+                <ReadOnlyGate>
                 <button
                   type="button"
                   className="showcase-btn showcase-btn--ghost"
@@ -1059,6 +1064,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 >
                   {t("text.clear")}
                 </button>
+                </ReadOnlyGate>
               </div>
             </div>
             {!history.length && !historyLoading ? (
