@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { benchId } from "../../constants";
 import { BenchIcon } from "../bench/BenchIcon";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
@@ -641,6 +642,7 @@ export function LlmPanel({
       }
     >
       {showSettings ? (
+        <ReadOnlyGate>
         <div className="sp-stack">
           <p className="sp-hint">
             {t("llm.settings.hint")}
@@ -757,6 +759,7 @@ export function LlmPanel({
             </button>
           </div>
         </div>
+        </ReadOnlyGate>
       ) : !available ? (
         <div className="sp-stack">
           <div className="sp-chips">

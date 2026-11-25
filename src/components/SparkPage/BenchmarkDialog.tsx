@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { decodeBenchSamplingLabel, decodeBenchSamplingMixed } from "./decodeSampling";
 import { createPortal } from "react-dom";
@@ -896,7 +897,8 @@ export function BenchmarkDialog({
           </>
         }
         runBar={
-          isRunning ? (
+          <ReadOnlyGate>
+          {isRunning ? (
             <button type="button" className="btn" onClick={() => void handleCancel()}>
               {t("dialog.cancelRun")}
             </button>
@@ -909,7 +911,8 @@ export function BenchmarkDialog({
             >
               {starting ? t("dialog.starting") : t("dialog.run")}
             </button>
-          )
+          )}
+          </ReadOnlyGate>
         }
       >
         {error && <p className="bench-sheet__error">{error}</p>}

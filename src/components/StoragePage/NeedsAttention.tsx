@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { acknowledgeElevatedDelete, ApiError, fetchStorageQuarantine, resolveStorageQuarantine } from "../../api/client";
@@ -244,6 +245,7 @@ function ResolveDialog({ sparkId, target, access, account, ack, onClose, onDone,
       tone={action === "delete" && !dismiss ? "danger" : "neutral"}
       icon={action === "restore" ? <RotateIcon className="h-4 w-4 shrink-0" /> : <TrashIcon className="h-4 w-4 shrink-0" />}
       footer={
+        <ReadOnlyGate>
         <>
           <button type="button" className="btn btn--ghost" onClick={onClose} disabled={busy}>
             {t("deletion.cancel")}
@@ -252,6 +254,7 @@ function ResolveDialog({ sparkId, target, access, account, ack, onClose, onDone,
             {busy ? t("deletion.working") : dismiss ? t("recovery.dismiss") : action === "restore" ? t("recovery.putBack") : asAdmin ? t("deletion.deleteAsAdmin") : t("deletion.deletePermanently")}
           </button>
         </>
+        </ReadOnlyGate>
       }
     >
       <div className="st-target">

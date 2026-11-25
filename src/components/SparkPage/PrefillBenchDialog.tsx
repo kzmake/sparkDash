@@ -1,3 +1,4 @@
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
@@ -737,7 +738,8 @@ export function PrefillBenchDialog({
           </>
         }
         runBar={
-          isRunning ? (
+          <ReadOnlyGate>
+          {isRunning ? (
             <button type="button" className="btn" onClick={() => void handleCancel()}>
               {t("dialog.cancelRun")}
             </button>
@@ -750,7 +752,8 @@ export function PrefillBenchDialog({
             >
               {starting ? t("dialog.starting") : t("dialog.run")}
             </button>
-          )
+          )}
+          </ReadOnlyGate>
         }
       >
         {error && <p className="bench-sheet__error">{error}</p>}
