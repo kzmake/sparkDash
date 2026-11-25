@@ -38,6 +38,7 @@ docs/
 !/docs/
 /docs/*
 !/docs/I18N-COVERAGE.md
+!/docs/READONLY.md
 mockups/
 PLAN.md
 tetris.html
@@ -65,3 +66,4 @@ __pycache__/
 !/docs/
 /docs/*
 !/docs/I18N-COVERAGE.md
+!/docs/READONLY.md

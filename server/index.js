@@ -24,7 +24,15 @@ import {
   validateDecodeContextBudget,
   validatePrefillBudget,
 } from "./validate.js";
-import { authStatus, authorizeUpgrade, createAuthMiddleware, createHostGuardMiddleware, isLoopbackBind, setTailscaleName } from "./auth.js";
+import {
+  authStatus,
+  authorizeUpgrade,
+  createAuthMiddleware,
+  createHostGuardMiddleware,
+  isLoopbackBind,
+  setTailscaleName,
+} from "./auth.js";
+import { createReadOnlyMiddleware, readOnlyMode } from "./readOnlyPolicy.js";
 import { inspectHealth } from "./health.js";
 import { getSettings, updateSettings, loadSettings } from "./settings.js";
 import { MqttPublisher } from "./mqtt/MqttPublisher.js";
@@ -560,6 +568,10 @@ app.get("/api/auth/status", createHostGuardMiddleware(), (req, res) => {
   res.json(authStatus(req));
 });
 app.use(createAuthMiddleware());
+// After auth: everything outside the allowlist is refused here, before a route
+// could change state or run a command.
+app.use(createReadOnlyMiddleware());
+if (readOnlyMode()) console.log("[sparkDash] read-only mode: serving only allowlisted reads");
 occupancy.register(app);
 
 /** Fleet event log, newest first. Query: limit, sparkId, sinceId. */
