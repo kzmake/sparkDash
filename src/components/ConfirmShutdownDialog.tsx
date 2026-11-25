@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useModalPresence } from "../hooks/useModalPresence";
 import { useOverlayClose } from "../hooks/useOverlayClose";
 import { useFocusTrap } from "../hooks/useFocusTrap";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 import { PowerOffIcon } from "./ui/icons";
 import "../styles/dialogs.css";
 
@@ -107,6 +108,7 @@ export function ConfirmShutdownDialog({
           </h2>
         </div>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__body modal-sheet__stack">
           <p className="modal-sheet__lead">{description}</p>
 
@@ -160,7 +162,9 @@ export function ConfirmShutdownDialog({
             />
           </div>
         </div>
+        </ReadOnlyGate>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__footer">
           <div className="modal-sheet__footer-actions">
             <button type="button" onClick={onClose} disabled={submitting} className="btn btn--ghost">
@@ -177,6 +181,7 @@ export function ConfirmShutdownDialog({
             </button>
           </div>
         </div>
+        </ReadOnlyGate>
       </div>
     </div>,
     document.body

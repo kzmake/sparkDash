@@ -1315,6 +1315,8 @@ export interface HealthResponse {
   warnings: string[];
   /** The running server's package version; absent on servers that predate the field. */
   version?: string | null;
+  /** True when the server runs with SPARKDASH_MODE_READONLY. */
+  readOnly?: boolean;
 }
 
 export interface InferenceActivity {

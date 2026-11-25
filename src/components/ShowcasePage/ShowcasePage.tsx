@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useShowcaseText } from "./showcaseText";
 import "../../styles/showcase.css";
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import {
   cancelShowcase,
   cancelShowcaseBeacon,
@@ -985,6 +986,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 &nbsp;
               </span>
               <div className="showcase-config__actions">
+                <ReadOnlyGate>
                 <button
                   type="button"
                   className="showcase-btn showcase-btn--primary"
@@ -993,6 +995,7 @@ export function ShowcasePage({ sparkId, embedded = false }: ShowcasePageProps) {
                 >
                   {starting ? t("text.starting") : t("text.run")}
                 </button>
+                </ReadOnlyGate>
                 {running && (
                   <button
                     type="button"

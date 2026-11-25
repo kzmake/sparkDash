@@ -3,6 +3,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { fetchGpuPower, setGpuPower } from "../api/client";
 import type { GpuPowerCard, GpuPowerStatus } from "../api/types";
 import { shortGpuName } from "../shared/gpuName";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 
 /** Whole watts a card accepts: nvidia-smi can report a fractional range. */
 const lowestW = (c: GpuPowerCard) => Math.ceil(c.minW ?? 0);
@@ -137,6 +138,7 @@ export function GpuPowerSection({ sparkId }: { sparkId: string }) {
   };
 
   return (
+    <ReadOnlyGate>
     <div className="gpu-clock">
       <span className="field-label">{t("gpuPower.title")}</span>
       {status.cards.map((c) => (
@@ -256,5 +258,6 @@ export function GpuPowerSection({ sparkId }: { sparkId: string }) {
         </p>
       )}
     </div>
+    </ReadOnlyGate>
   );
 }
