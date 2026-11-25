@@ -46,6 +46,7 @@ import {
   DiskIcon,
 } from "./components/ui/icons";
 import { ConnectionBanner } from "./components/ui/ConnectionBanner";
+import { ReadOnlyProvider } from "./components/ui/ReadOnlyGate";
 import { ErrorBanner } from "./components/ui/ErrorBanner";
 import {
   ACTIVITY_ID,
@@ -224,6 +225,7 @@ function DashboardApp() {
   }, []);
   const [settings, setSettings] = useState<Settings | null>(null);
   const [authMode, setAuthMode] = useState<AuthMode | null>(null);
+  const [readOnly, setReadOnly] = useState(false);
   /** Version the running server reports; Settings falls back to this page's own build. */
   const [serverVersion, setServerVersion] = useState<string | null>(null);
   const [actionError, setActionError] = useState<{
@@ -351,6 +353,7 @@ function DashboardApp() {
       .then((h) => {
         setAuthMode(h.authMode);
         setServerVersion(h.version ?? null);
+        setReadOnly(h.readOnly === true);
       })
       .catch(() => {
         setAuthMode(null);
@@ -540,6 +543,7 @@ function DashboardApp() {
   }, [displaySparks, displayActive, navigate, toggleSidebar, t, benchLabels, apiKeysEnabled]);
 
   return (
+    <ReadOnlyProvider value={readOnly}>
     <div className="min-h-screen text-text">
       <div className={`app-shell${sideHidden ? " app-shell--side-hidden" : ""}`}>
         <AppSidebar
@@ -729,6 +733,7 @@ function DashboardApp() {
         }))}
       />
     </div>
+    </ReadOnlyProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import type { TFunction } from "i18next";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
@@ -343,6 +344,7 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
           {l.notes ? <div className="sp-launch__notes">{l.notes}</div> : null}
           {serving && live?.modelId ? <div className="sp-launch__notes mono">{live.modelId}</div> : null}
         </div>
+        <ReadOnlyGate>
         <div className="sp-launch__actions">
           {pending?.kind === "stop" ? (
             <>
@@ -448,6 +450,7 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
             </>
           )}
         </div>
+        </ReadOnlyGate>
       </SortableLaunch>
     );
   });
@@ -458,10 +461,12 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
       icon={<BotIcon className="h-4 w-4" />}
       className={className}
       actions={
+        <ReadOnlyGate>
         <button type="button" className="btn btn--sm" onClick={() => setDialog({ open: true, launcher: null })}>
           <PlusIcon className="h-3.5 w-3.5" />
           {t("models.add")}
         </button>
+        </ReadOnlyGate>
       }
     >
       <div className="sp-models">
@@ -475,10 +480,12 @@ function LlmModelsPanelFor({ spark, className }: { spark: SparkSnapshot; classNa
             <p>
               {t("models.empty", { name: spark.name })}
             </p>
+            <ReadOnlyGate>
             <button type="button" className="btn btn--primary btn--sm" onClick={() => setDialog({ open: true, launcher: null })}>
               <PlusIcon className="h-3.5 w-3.5" />
               {t("models.first")}
             </button>
+            </ReadOnlyGate>
           </div>
         ) : null}
         {launchers.length > 0 ? (

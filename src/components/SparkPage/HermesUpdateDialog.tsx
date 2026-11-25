@@ -10,6 +10,7 @@ import {
   closeHermesUpdateDialog,
   useHermesUpdateDialog,
 } from "../../hooks/useHermesUpdateDialog";
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { ExternalLinkIcon, RotateIcon, XIcon } from "../ui/icons";
 import "../../styles/dialogs.css";
 
@@ -508,6 +509,7 @@ export function HermesUpdateDialog() {
           ) : null}
         </div>
 
+        <ReadOnlyGate>
         <div className="modal-sheet__footer">
           <p className="text-[10px] text-muted">
             {t("hermes.command", { name: target?.sparkName })}
@@ -538,6 +540,7 @@ export function HermesUpdateDialog() {
             </button>
           </div>
         </div>
+        </ReadOnlyGate>
       </div>
     </div>,
     document.body

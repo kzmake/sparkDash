@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fetchGpuClock, fetchSparks, resetFleetGpuClock, setFleetGpuClock } from "../api/client";
 import type { FleetGpuClockResult, GpuClockPersistKind, GpuClockStatus } from "../api/types";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 
 /** Fleet-wide GPU clock options: full capacity first, then 1800–2400 MHz in 100 MHz steps. */
 const CAP_PRESETS = [1800, 1900, 2000, 2100, 2200, 2300, 2400] as const;
@@ -321,6 +322,7 @@ export function FleetGpuClock({
   }
 
   return (
+    <ReadOnlyGate>
     <div className="set-fleetcap">
       <p className="gpu-clock__now" data-testid="fleet-now">
         {now === null ? (
@@ -394,5 +396,6 @@ export function FleetGpuClock({
         </p>
       ) : null}
     </div>
+    </ReadOnlyGate>
   );
 }

@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { acknowledgeElevatedDelete, ApiError } from "../../api/client";
 import type { StorageBulkDeleteJob, StorageElevatedDeleteAck, StorageElevation } from "../../api/types";
 import { formatBytes } from "../../shared/formatBytes";
+import { ReadOnlyGate } from "../ui/ReadOnlyGate";
 import { AlertTriangleIcon, CopyIcon, FileIcon, FolderIcon, LinkIcon, TrashIcon } from "../ui/icons";
 import { AdminDeleteAckField } from "./AdminDeleteAck";
 import { AdminFields } from "./AdminFields";
@@ -271,6 +272,7 @@ export function BulkDeleteDialog({ sparkId, sparkName, selection, access, prefer
       title={t("deletion.deleteItemsTitle", { count })}
       icon={<TrashIcon className="h-4 w-4 shrink-0" />}
       footer={
+        <ReadOnlyGate>
         <>
           <button type="button" className="btn btn--ghost" onClick={onClose} disabled={busy}>
             {t("deletion.cancel")}
@@ -280,6 +282,7 @@ export function BulkDeleteDialog({ sparkId, sparkName, selection, access, prefer
             {label}
           </button>
         </>
+        </ReadOnlyGate>
       }
     >
       <div className="st-target st-bulk">

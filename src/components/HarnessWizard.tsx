@@ -9,6 +9,7 @@ import {
 } from "../api/client";
 import type { OccupancyCheck, OccupancyHelper, OccupancyHelperInput, OccupancyRoute } from "../api/types";
 import { useModalPresence } from "../hooks/useModalPresence";
+import { ReadOnlyGate } from "./ui/ReadOnlyGate";
 import { XIcon } from "./ui/icons";
 
 const HARNESSES = [
@@ -309,6 +310,7 @@ export function HarnessWizard({ open, onClose, sparks, sparkId }: HarnessWizardP
             <XIcon className="h-4 w-4" />
           </button>
         </div>
+        <ReadOnlyGate>
         <div className="modal-sheet__body">
           {loading && <p className="bench-sheet__hint">{t("actions.loading")}</p>}
           {error && <p role="alert" className="modal-sheet__error">{error === "load" ? t("harness.errors.load") : error === "check" ? t("harness.errors.check") : error === "save" ? t("harness.errors.save") : error === "remove" ? t("harness.errors.remove") : error}</p>}
@@ -472,7 +474,9 @@ export function HarnessWizard({ open, onClose, sparks, sparkId }: HarnessWizardP
             </>
           )}
         </div>
+        </ReadOnlyGate>
         {editing && (
+          <ReadOnlyGate>
           <div className="modal-sheet__footer">
             <div className="modal-sheet__footer-actions">
               <button type="button" className="btn btn--ghost" onClick={() => (step === 0 ? setEditing(helpers.length > 0) : setStep((prev) => prev - 1))}>
@@ -487,6 +491,7 @@ export function HarnessWizard({ open, onClose, sparks, sparkId }: HarnessWizardP
               )}
             </div>
           </div>
+          </ReadOnlyGate>
         )}
       </div>
     </div>,
